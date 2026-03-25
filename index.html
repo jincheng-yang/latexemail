@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Email with LaTeX</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+      line-height: 1.5;
+    }
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      font-family: monospace;
+      font-size: 15px;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    .buttons {
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #preview {
+      border: 1px solid #ccc;
+      padding: 16px;
+      min-height: 120px;
+      border-radius: 8px;
+    }
+    .math-inline {
+      vertical-align: middle;
+    }
+    .math-display {
+      display: block;
+      margin: 12px auto;
+    }
+    .note {
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Email with LaTeX</h1>
+
+  <p>
+    Use <code>$...$</code> for inline math and <code>$$...$$</code> for display math.
+  </p>
+
+  <textarea id="input">
+Here is inline math: $E = mc^2$.
+
+Here is another one: $\int_0^1 x^2\,dx$.
+
+And here is display math:
+
+$$
+\sum_{k=1}^n k = \frac{n(n+1)}{2}
+$$
+  </textarea>
+
+  <div class="buttons">
+    <button id="renderBtn">Render Preview</button>
+    <button id="copyBtn">Copy Rendered HTML (SVG)</button>
+    <button id="copyPngBtn">Copy Rendered HTML (PNG)</button>
+  </div>
+
+  <p class="note">
+    This uses CodeCogs image URLs, so copied content will contain external image links.
+    Use the PNG button if SVG images do not render correctly in your mail client.
+  </p>
+
+  <h2>Preview</h2>
+  <div id="preview"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
