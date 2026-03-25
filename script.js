@@ -5,6 +5,10 @@ function escapeHtml(text) {
     .replace(/>/g, "&gt;");
 }
 
+function escapeAttribute(text) {
+  return escapeHtml(text).replace(/"/g, "&quot;");
+}
+
 const inlineMetricsCache = new Map();
 let metricsScriptQueue = Promise.resolve();
 let latestRenderId = 0;
@@ -143,12 +147,13 @@ function latexToImg(latex, displayMode, format = "svg", metrics = null) {
   const trimmed = latex.trim();
   const url = buildMathUrl(trimmed, displayMode, format);
   const cls = displayMode ? "math-display" : "math-inline";
-  const alt = escapeHtml(trimmed).replace(/"/g, "&quot;");
+  const alt = escapeAttribute(trimmed.replace(/\s+/g, " "));
+  const title = escapeAttribute(trimmed);
   const style = displayMode
     ? "display:block;margin:12px auto;max-width:100%;"
     : inlineMathStyle(metrics);
 
-  return `<img class="${cls}" src="${url}" alt="${alt}" style="${style}">`;
+  return `<img class="${cls}" src="${url}" alt="${alt}" title="${title}" style="${style}">`;
 }
 
 function encodeMathToken(latex) {
